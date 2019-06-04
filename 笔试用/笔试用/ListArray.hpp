@@ -31,3 +31,20 @@ void PrintListArray(const ListNode* head)
 	cout << ']' << endl;
 #endif // _DEBUG
 }
+
+ListNode*CopyListArray(const ListNode*head)
+{
+	if (head == nullptr)
+		return nullptr;
+	ListNode*newHead = new ListNode(head->val), *pnew = newHead;
+	const ListNode *p = head;
+	unordered_map<const ListNode*, ListNode*>m;
+	while (p->next != nullptr)
+	{
+		pnew->next = new ListNode(p->next->val);
+		m[p] = pnew;
+		p = p->next;
+		pnew = pnew->next;
+	}
+	return newHead;
+}
