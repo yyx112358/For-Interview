@@ -15,7 +15,7 @@ ListNode*CreateListArray(vector<int>&input)
 		head = new ListNode(input.front());
 
 	ListNode*p = head;
-	for (auto i = 1; i < input.size(); ++i, p = p->next)
+	for (auto i = 1u; i < input.size(); ++i, p = p->next)
 		p->next = new ListNode(input[i]);
 	return head;
 }
