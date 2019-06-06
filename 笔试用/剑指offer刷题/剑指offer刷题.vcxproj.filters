@@ -24,6 +24,9 @@
     <ClCompile Include="树的子结构.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="合并排序链表.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\笔试用\BinTree.h">

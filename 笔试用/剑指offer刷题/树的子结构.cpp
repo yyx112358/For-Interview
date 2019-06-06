@@ -42,37 +42,7 @@ public:
 			&& _isSubtree(s->right, t->right) == true;
 	}
 };
-vector<int> printMatrix(vector<vector<int> > matrix)
-{
-	vector<int>rst;
-	if (matrix.size() == 0 || matrix[0].size() == 0)
-		return rst;
-	enum { E_RIGHT, E_DOWN, E_LEFT, E_UP }dir = E_RIGHT;//状态标志
-	const size_t rowCnt = matrix.size(), colCnt = matrix[0].size();
 
-	//停止条件，输出个数cnt==矩阵元素数
-	//状态转移条件：n为圈数，当前位置为距离边界n圈的位置则转移状态
-	//  n用状态转移数changeDIR/4来表示，注意changeDIR初始值为1，因为从初始状态转移到RIGHT也有1次
-	for (auto cnt = 0, row = 0, col = 0, changeDIR = 1; cnt < rowCnt*colCnt; cnt++)
-	{
-		rst.push_back(matrix[row][col]);//输出当前位置的元素
-		switch (dir)//判定是否改变方向。
-		{
-		case E_RIGHT:if (col >= colCnt - changeDIR / 4 - 1) { dir = E_DOWN; changeDIR++; }break;
-		case E_DOWN:if (row >= rowCnt - changeDIR / 4 - 1) { dir = E_LEFT; changeDIR++; }break;
-		case E_LEFT:if (col <= changeDIR / 4) { dir = E_UP; changeDIR++; }break;
-		case E_UP:if (row <= changeDIR / 4) { dir = E_RIGHT; changeDIR++; }break;
-		}
-		switch (dir)//移动
-		{
-		case E_RIGHT:col++; break;
-		case E_DOWN:row++; break;
-		case E_LEFT:col--; break;
-		case E_UP:row--; break;
-		}
-	}
-	return rst;
-}
 int main()
 {
 	srand(0x411);
