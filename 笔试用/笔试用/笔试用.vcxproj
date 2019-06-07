@@ -120,6 +120,7 @@
     <ClInclude Include="BinTree.h" />
     <ClInclude Include="GlobalInc.h" />
     <ClInclude Include="ListArray.hpp" />
+    <ClInclude Include="OtherTools.h" />
     <ClInclude Include="Plot.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

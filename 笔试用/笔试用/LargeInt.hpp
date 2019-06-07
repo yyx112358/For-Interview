@@ -1,23 +1,20 @@
 #pragma once
-//https://www.cnblogs.com/rmthy/p/8644236.html
+//参考了 https://www.cnblogs.com/rmthy/p/8644236.html
 #include <iostream>
 #include <vector>
 #include <string>
-
-typedef unsigned int uint;
-typedef unsigned long long uint64;
 
 #define MAX_VAL 1000000000 // 10亿
 #define VAL_LEN 9
 #define FORMAT_STR "%09d"
 
-//大整数类。支持任意长度无符号整数，不支持负数、浮点数
+//无符号大整数类。支持任意长度无符号整数，不支持负数、浮点数
 class LargeInt
 {
 public:
 	LargeInt::LargeInt() {}
 
-	LargeInt::LargeInt(uint val)
+	LargeInt::LargeInt(uint32_t val)
 	{
 		this->_data.push_back(val % MAX_VAL);
 		if (val >= MAX_VAL)
@@ -58,8 +55,8 @@ public:
 		int         maxLen = len1 > len2 ? len1 : len2;
 		const LargeInt &extraLi = (len1 > len2) ? (*this) : li;
 
-		uint        value = 0;  // 和，不超过最大值的2倍
-		uint        carry = 0;  // 进位
+		uint32_t        value = 0;  // 和，不超过最大值的2倍
+		uint32_t        carry = 0;  // 进位
 		LargeInt    retVal;
 
 		for (int idx = 0; idx < minLen; ++idx)
@@ -111,8 +108,8 @@ public:
 		int         len1 = this->_data.size();
 		int         len2 = li._data.size();
 
-		uint        value = 0;  // 差
-		uint        carry = 0;  // 借位
+		uint32_t        value = 0;  // 差
+		uint32_t        carry = 0;  // 借位
 		LargeInt    retVal;
 
 		for (int idx = 0; idx < len2; ++idx)
@@ -157,8 +154,8 @@ public:
 
 		if (len1 < len2) return li.operator*(*this); // 优化，保证被乘数位数大于乘数
 
-		uint64      value;      // 积
-		uint64      carry = 0;  // 进位
+		uint64_t      value;      // 积
+		uint64_t      carry = 0;  // 进位
 		LargeInt    retVal(0);
 		LargeInt    mulTemp;
 
@@ -173,14 +170,14 @@ public:
 
 			for (int idx1 = 0; idx1 < len1; ++idx1)
 			{
-				value = (uint64)(li._data[idx2]) * (uint64)(this->_data[idx1]) + carry;
+				value = (uint64_t)(li._data[idx2]) * (uint64_t)(this->_data[idx1]) + carry;
 
-				mulTemp._data.push_back((uint)(value % MAX_VAL));
+				mulTemp._data.push_back((uint32_t)(value % MAX_VAL));
 				carry = value / MAX_VAL;
 			}
 
 			if (carry)
-				mulTemp._data.push_back((uint)carry);
+				mulTemp._data.push_back((uint32_t)carry);
 
 			retVal = retVal + mulTemp;
 		}
@@ -196,7 +193,7 @@ public:
 		int         len1 = this->_data.size();
 		int         len2 = li._data.size();
 
-		uint        value;
+		uint32_t        value;
 		LargeInt    retVal;
 		LargeInt    divTemp;
 
@@ -230,7 +227,7 @@ public:
 		int         len1 = this->_data.size();
 		int         len2 = li._data.size();
 
-		uint        value;
+		uint32_t        value;
 		LargeInt    retVal;
 		LargeInt    divTemp;
 
@@ -286,7 +283,7 @@ public:
 		return os;
 	}
 private:
-	std::vector<uint>  _data;
+	std::vector<uint32_t>  _data;
 
 	inline bool isDigit(const char ch) { return ch >= '0' && ch <= '9'; }
 
@@ -330,12 +327,12 @@ private:
 	}
 
 	// 计算商值
-	uint LargeInt::getMaxCycle(const LargeInt &liA, const LargeInt &liB) const
+	uint32_t LargeInt::getMaxCycle(const LargeInt &liA, const LargeInt &liB) const
 	{
 		LargeInt        tempA = liA;
 		const LargeInt& tempB = liB;
-		uint            tempC;
-		uint            res = 0;
+		uint32_t            tempC;
+		uint32_t            res = 0;
 		bool            flag = true;
 		while (tempA >= tempB)
 		{
@@ -351,31 +348,31 @@ private:
 	}
 
 	// 估值
-	uint LargeInt::estimateQuotient(const LargeInt &liA, const LargeInt &liB) const
+	uint32_t LargeInt::estimateQuotient(const LargeInt &liA, const LargeInt &liB) const
 	{
 		int         lenA = liA._data.size();
 		int         lenB = liB._data.size();
-		uint64      valA, valB;
+		uint64_t      valA, valB;
 
 		if (lenA == lenB)
 		{
 			if (lenA > 1)
 			{
-				valA = (uint64)liA._data[lenA - 1] * MAX_VAL + liA._data[lenA - 2];
-				valB = (uint64)liB._data[lenB - 1] * MAX_VAL + liB._data[lenB - 2];
+				valA = (uint64_t)liA._data[lenA - 1] * MAX_VAL + liA._data[lenA - 2];
+				valB = (uint64_t)liB._data[lenB - 1] * MAX_VAL + liB._data[lenB - 2];
 			}
 			else
 			{
-				valA = (uint64)liA._data[lenA - 1];
-				valB = (uint64)liB._data[lenB - 1];
+				valA = (uint64_t)liA._data[lenA - 1];
+				valB = (uint64_t)liB._data[lenB - 1];
 			}
 		}
 		else
 		{
-			valA = (uint64)liA._data[lenA - 1] * MAX_VAL + liA._data[lenA - 2];
-			valB = (uint64)liB._data[lenB - 1];
+			valA = (uint64_t)liA._data[lenA - 1] * MAX_VAL + liA._data[lenA - 2];
+			valB = (uint64_t)liB._data[lenB - 1];
 		}
-		return (uint)(valA / valB);
+		return (uint32_t)(valA / valB);
 	}
 };
 

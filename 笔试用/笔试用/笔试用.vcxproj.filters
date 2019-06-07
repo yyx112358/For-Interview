@@ -41,5 +41,8 @@
     <ClInclude Include="LargeInt.hpp">
       <Filter>工具</Filter>
     </ClInclude>
+    <ClInclude Include="OtherTools.h">
+      <Filter>工具</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
