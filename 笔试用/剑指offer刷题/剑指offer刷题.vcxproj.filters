@@ -24,6 +24,21 @@
     <ClCompile Include="树的子结构.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="合并排序链表.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="二叉树中和为某一值的路径.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="二叉树的后序搜索序列.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Anything.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="复杂链表的复制.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\笔试用\BinTree.h">
