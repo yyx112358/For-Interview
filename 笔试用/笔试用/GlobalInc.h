@@ -11,6 +11,7 @@
 #include <vector>
 #include <unordered_map>
 #include <xfunctional>
+#include <functional>
 #include <random>
 #include <numeric>
 #include <assert.h>

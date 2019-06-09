@@ -6,6 +6,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(nullptr) {}	
 };
 //从一个vector<int>中创建链表
+//如auto listArray=CreateListArray(vector<int>{1,2,3,4,5});
 ListNode*CreateListArray(vector<int>&input)
 {
 	ListNode*head;
