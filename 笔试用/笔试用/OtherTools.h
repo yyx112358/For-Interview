@@ -10,14 +10,14 @@ public:
 	Permutation(vector<Tp>&src, size_t n);//取出n个数做排列
 
 	//全排列
-	vector<vector<Tp>>GetAll();
-	vector<Tp>GetNext();
-	bool GetNext(vector<Tp>&result);
+	vector<vector<Tp>>GetAll(bool allowDuplication=false);
+	vector<Tp>GetNext(bool allowDuplication = false);
+	bool GetNext(vector<Tp>&result, bool allowDuplication = false);
 
 	//子集
-	vector<vector<Tp>>GetSub();
-	vector<Tp>GetSub();
-	bool GetSub(vector<Tp>&result);
+	vector<vector<Tp>>GetSub(bool allowDuplication = false);
+	vector<Tp>GetSub(bool allowDuplication = false);
+	bool GetSub(vector<Tp>&result, bool allowDuplication = false);
 private:
 	Permutation();
 
@@ -25,14 +25,16 @@ private:
 	vector<size_t>_ids;
 	size_t _n;
 };
-
+//TODO:取模运算
 class ModNumber//取模运算数
 {
 public:
 	ModNumber(int mod);
 	ModNumber(int64_t num, int mod);
 
-	//TODO:加减乘除比较
+	//加减乘除比较
+
+	operator int64_t()const;
 private:
 	ModNumber();
 

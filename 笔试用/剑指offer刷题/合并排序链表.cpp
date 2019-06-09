@@ -5,6 +5,16 @@
 #include <memory>
 #include <vld.h>
 
+template<typename Tp>
+ostream&operator<<(ostream&os, vector<Tp>&v)
+{
+	os << '[';
+	for (auto &i : v)
+		os << i << ',';
+	os << ']' << endl;
+	return os;
+}
+
 /*合并有序链表
 
 */
