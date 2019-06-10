@@ -18,26 +18,34 @@ ostream&operator<<(ostream&os, const vector<Tp>&v)
 /*
 
 */
-struct RandomListNode {
-	int label;
-	struct RandomListNode *next, *random;
-	RandomListNode(int x) :
-		label(x), next(NULL), random(NULL) {}
+struct Node {
+	int val;
+	struct Node *next, *random;
+	Node() {}
+
+	Node(int _val, Node* _next, Node* _random) {
+		val = _val;
+		next = _next;
+		random = _random;
+	}
 };
 class Solution {
 public:
-	RandomListNode* Clone(RandomListNode* pHead)
+	Node* Clone(Node* head)
 	{
-		if (pHead == nullptr)
+		if (head == nullptr)
 			return nullptr;
-
-		RandomListNode*newHead = new RandomListNode(pHead->label);
-		unordered_map<RandomListNode*, RandomListNode*>tbl;
-		for (auto p = pHead, pnew = newHead;p->next!=nullptr;p=p->next)
+		auto newHead = new Node(head->val,nullptr,nullptr);
+		unordered_map<Node*, Node*>tbl;
+		tbl[head] = newHead;
+		for (auto p = head, pnew = newHead; p->next != nullptr; p = p->next, pnew = pnew->next)
 		{
-
+			pnew->next = new Node(p->next->val, nullptr, nullptr);
+			tbl[p->next] = pnew->next;
 		}
-
+		for (auto p = head, pnew = newHead; p != nullptr; p = p->next, pnew = pnew->next)
+			pnew->random = tbl[p->random];
+		return newHead;
 	}
 };
 

@@ -113,6 +113,7 @@
   <ItemGroup>
     <ClCompile Include="BinTree.cpp" />
     <ClCompile Include="Plot.cpp" />
+    <ClCompile Include="各种排序算法.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <ItemGroup>
