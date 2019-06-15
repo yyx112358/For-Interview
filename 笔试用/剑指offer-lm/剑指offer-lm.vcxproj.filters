@@ -27,6 +27,12 @@
     <ClCompile Include="复杂链表的复制.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="牛客校招循环队列.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="牛客校招DNAxulie.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\笔试用\BinTree.h">
