@@ -49,3 +49,25 @@ ostream&operator<<(ostream&os, const vector<Tp>&v)
 	os << ']' << endl;
 	return os;
 }
+//用于字符串分割的函数
+//例如，split("2019-07-01","-")将获得{"2019","07","01"}
+std::vector<std::string> split(std::string str, const std::string& pattern)
+{
+	size_t pos;
+	std::vector<std::string> result;
+
+	str += pattern;//扩展字符串以方便操作
+	size_t size = str.size();
+
+	for (size_t i = 0; i < size; i++)
+	{
+		pos = str.find(pattern, i);
+		if (pos < size)
+		{
+			std::string s = str.substr(i, pos - i);
+			result.push_back(s);
+			i = pos + pattern.size() - 1;
+		}
+	}
+	return result;
+}

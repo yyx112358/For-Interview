@@ -1,56 +1,108 @@
-#include "..\笔试用\GlobalInc.h"
-#include "..\笔试用\ListArray.hpp"
-#include "..\笔试用\BinTree.h"
-#include "..\笔试用\Plot.h"
-#include <memory>
-#include <vld.h>
+// #include "..\笔试用\GlobalInc.h"
+// #include "..\笔试用\ListArray.hpp"
+// #include "..\笔试用\BinTree.h"
+// #include "..\笔试用\Plot.h"
+// #include <memory>
+// #include <vld.h>
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <sstream>
+#include <stdlib.h>
+#include <queue>
+#include <stack>
+#include <string>
+#include <map>
+#include <set>
+#include <vector>
+#include <unordered_map>
+//#include <xfunctional>
+#include <functional>
+#include <random>
+#include <numeric>
+#include <assert.h>
+#include <time.h>
+#include <array>
+#include <bitset>
+
+using namespace std;
 
 //用来打印vector的模板函数
 template<typename Tp>
 ostream&operator<<(ostream&os, const vector<Tp>&v)
 {
 	os << '[';
-	for (auto &i : v)
+	for (auto i : v)
 		os << i << ',';
 	os << ']' << endl;
 	return os;
 }
-class Solution {
-public:
-	int NumberOf1Between1AndN_Solution(int n)
-	{
-		vector<int>record{1,20,300,4000,50000,600000,7000000,80000000,900000000};
-		//[0,1]有0个，[0,9]有1个，[0,99]有10+10*1(10位10次，1位10次)，[0,999]有100+100+100
-		//如12345，1~9999有4000次，10000~12345有2345+1次1出现在10000，
-		int sum = 0;
-		for (auto i = 1; i <= n; i++)
-		{
-			int tmp = i;
-			while (tmp > 0)
-			{
-				if (tmp % 10 == 1)
-					sum++;
-				tmp /= 10;
-			}
-		}
-		return sum;
-	}
-};
 
-int main()
+std::vector<std::string> split(std::string str, const std::string& pattern)
 {
-	srand(0x411);
-	Solution solution;
-	cout << solution.NumberOf1Between1AndN_Solution(1) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(9) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(13) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(99) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(999) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(9999) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(99999) << endl;
-	cout << solution.NumberOf1Between1AndN_Solution(12345) << endl;
+	size_t pos;
+	std::vector<std::string> result;
 
-	system("pause");
-	return 0;
+	str += pattern;//扩展字符串以方便操作
+	size_t size = str.size();
+
+	for (size_t i = 0; i < size; i++)
+	{
+		pos = str.find(pattern, i);
+		if (pos < size)
+		{
+			std::string s = str.substr(i, pos - i);
+			result.push_back(s);
+			i = pos + pattern.size() - 1;
+		}
+	}
+	return result;
 }
 
+int waste(int N)
+{
+	if (N % 150 == 0 || N % 200 == 0 || N % 250 == 0)
+		return 0;
+	
+	int left = 99999999;
+
+	N %= 120 * 50;
+
+	if (N % 350 > 200)
+		left=min( N % 350 - 200,left);
+	else if (N % 350 > 150)
+		left = min(N % 350 - 200, left);
+	else
+		left = min(N % 350, left);
+
+	if (N % 200 > 150)
+		left = min(N % 200 - 150, left);
+	else
+		left = min(N % 200, left);
+
+	left = min(N % 150, left);
+
+	return left;
+}
+/*
+2
+340
+900
+*/
+int main()
+{
+	int t;
+	cin >> t;
+	for (auto i = 0; i < t; i++)
+	{
+		int N;
+		cin >> N;
+		cout << waste(N) << endl;
+	}
+#ifdef _DEBUG
+	system("pause");
+#endif // _DEBUG
+	return 0;
+}
